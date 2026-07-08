@@ -1,0 +1,89 @@
+\chapter*{APPENDIX}
+\addcontentsline{toc}{chapter}{Appendix}
+
+\section*{Appendix A – Daily Internship Diary}
+\textit{[Placeholder for scanned copies or digital records of the daily internship diary, detailing day-to-day activities and tasks completed.]}
+\vspace{1cm}
+
+\section*{Appendix B – Weekly Internship Reports}
+\textit{[Placeholder for the formal weekly internship reports approved by the industry mentor, summarizing the learning outcomes and project progress for Weeks 1 through 6.]}
+\vspace{1cm}
+
+\includepdf[pages=-, scale=0.9, pagecommand={\section*{Appendix C – Attendance Sheet}}]{Internship_Attendance_Sheet.pdf}
+
+\includepdf[pages=-, scale=0.9, pagecommand={\section*{Appendix D – Internship Certificate}}]{Internship_Certificate.pdf}
+
+\section*{Appendix E – Additional Screenshots}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{images/07-analytics.png}
+\caption{QualiVision AI - Performance Analytics}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{images/10-dataset.png}
+\caption{Dataset Repository Management Interface}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/confusion_matrix.png}
+\caption{Model Confusion Matrix}
+\end{figure}
+\vspace{1cm}
+
+\section*{Appendix F – Source Code Snippets}
+\textbf{QualiVision AI - Flask Prediction Endpoint (app.py):}
+\begin{verbatim}
+@app.route('/api/predict', methods=['POST'])
+def predict():
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image uploaded'}), 400
+    
+    file = request.files['image']
+    image_bytes = file.read()
+    
+    # Preprocess image
+    processed_image = preprocess_image(image_bytes)
+    
+    # Perform inference
+    predictions = model.predict(processed_image)
+    confidence = np.max(predictions)
+    predicted_class = class_names[np.argmax(predictions)]
+    
+    # Generate Grad-CAM
+    heatmap_path = generate_gradcam(processed_image, predicted_class)
+    
+    # Log to database
+    log_prediction_to_db(predicted_class, confidence, heatmap_path)
+    
+    return jsonify({
+        'status': 'success',
+        'prediction': predicted_class,
+        'confidence': float(confidence),
+        'gradcam_url': heatmap_path
+    })
+\end{verbatim}
+\vspace{1cm}
+
+\section*{Appendix G – Model Evaluation Results}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+Validation Accuracy & 99.82\% \\
+\hline
+Validation Loss & 0.0076 \\
+\hline
+Precision & 99.85\% \\
+\hline
+Recall & 99.80\% \\
+\hline
+F1-Score & 99.82\% \\
+\hline
+Inference Time & ~45 ms (RTX 3050) \\
+\hline
+\end{tabular}
+\caption{QualiVision AI EfficientNetV2B0 Performance Metrics}
+\end{table}
