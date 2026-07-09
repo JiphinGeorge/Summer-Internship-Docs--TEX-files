@@ -45,10 +45,6 @@ The application pipeline involved:
 
 The user interface was significantly enhanced to feature a responsive layout, modern prediction cards, dynamic confidence bars, and a professional dashboard layout. Explorations into \cite{google_stitch} Google Stitch provided inspiration for modern UI design, prompting discussions on migrating the application from Streamlit to a more flexible Flask architecture.
 
-\subsection{Challenges and Debugging}
-
-A major challenge encountered during deployment was a TensorFlow compatibility issue. Version conflicts between legacy Keras models exported by Teachable Machine and newer TensorFlow installations caused model loading failures. Through a rigorous debugging methodology, the issue was resolved by utilizing the \texttt{tf\_keras} compatibility package, which successfully facilitated model deserialization.
-
 \subsection{Project Outcome}
 
 The Smart Cam Classifier project successfully demonstrated the practical application of Computer Vision and Image Classification. It provided vital experience in TensorFlow deployment, dependency debugging, and application development, serving as the perfect transition toward the highly complex industrial AI project that followed.
