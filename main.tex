@@ -15,11 +15,11 @@
 \usepackage{fancyhdr}
 \usepackage{tocloft}
 \renewcommand{\cfttoctitlefont}{\hfill\bfseries\Large\MakeUppercase}
-\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftaftertoctitle}{\hfill\null}
 \renewcommand{\cftloftitlefont}{\hfill\bfseries\Large\MakeUppercase}
-\renewcommand{\cftafterloftitle}{\hfill}
+\renewcommand{\cftafterloftitle}{\hfill\null}
 \renewcommand{\cftlottitlefont}{\hfill\bfseries\Large\MakeUppercase}
-\renewcommand{\cftafterlottitle}{\hfill}
+\renewcommand{\cftafterlottitle}{\hfill\null}
 \usepackage{emptypage}
 \usepackage{float}
 \usepackage{pdfpages}
@@ -38,11 +38,9 @@
 % -------------------- HEADER / FOOTER SETUP --------------------
 \fancypagestyle{frontmatter}{
     \fancyhf{}
-    \fancyhead[R]{QualiVision AI}
-    \renewcommand{\headrulewidth}{0.4pt}
-    \fancyfoot[L]{Department of Computer Applications}
-    \fancyfoot[R]{\thepage}
-    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
 }
 
 \fancypagestyle{mainmatter}{
@@ -116,10 +114,11 @@
 \clearpage
 \fancypagestyle{plain}{
     \fancyhf{}
+    \fancyfoot[C]{\thepage}
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
 }
-\pagestyle{empty}
+\pagestyle{frontmatter}
 
 \tableofcontents
 \newpage
