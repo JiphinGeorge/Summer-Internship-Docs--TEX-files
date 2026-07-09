@@ -62,14 +62,12 @@
     \renewcommand{\footrulewidth}{0.4pt}
 }
 
-% Plain override (used by \chapter) -> use mainmatter style
+% Plain override for frontmatter (redefined later for mainmatter)
 \fancypagestyle{plain}{
     \fancyhf{}
-    \fancyhead[R]{QualiVision AI}
-    \renewcommand{\headrulewidth}{0.4pt}
-    \fancyfoot[L]{Department of Computer Applications}
-    \fancyfoot[R]{\thepage}
-    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
 }
 
 % -------------------- CHAPTER TITLE FORMAT --------------------
