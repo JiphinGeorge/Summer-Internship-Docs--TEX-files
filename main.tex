@@ -14,6 +14,12 @@
 \usepackage{enumitem}
 \usepackage{fancyhdr}
 \usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\hfill\bfseries\Large\MakeUppercase}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftloftitlefont}{\hfill\bfseries\Large\MakeUppercase}
+\renewcommand{\cftafterloftitle}{\hfill}
+\renewcommand{\cftlottitlefont}{\hfill\bfseries\Large\MakeUppercase}
+\renewcommand{\cftafterlottitle}{\hfill}
 \usepackage{emptypage}
 \usepackage{float}
 \usepackage{pdfpages}
@@ -100,6 +106,10 @@
 
 \include{cover}
 \include{certificate}
+
+% Insert Organization Certificate here
+\includepdf[pages=-]{Internship_Certificate.pdf}
+
 \include{frontmatter}
 
 \newpage
