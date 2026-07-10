@@ -83,14 +83,9 @@ The specific objectives of QualiVision AI included:
 \subsection{System Overview}
 
 The complete system workflow is designed for efficiency and traceability:
-Image Acquisition $\rightarrow$ Image Preprocessing $\rightarrow$ Deep Learning Model $\rightarrow$ Prediction $\rightarrow$ Confidence Score $\rightarrow$ Grad-CAM Visualization $\rightarrow$ Database Storage $\rightarrow$ Dashboard Display $\rightarrow$ Reports.
+Image Acquisition $\rightarrow$ Image Preprocessing $\rightarrow$ Deep Learning Model $\rightarrow$ Prediction.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{images/architecture.png}
-\caption{System Architecture of QualiVision AI}
-\label{fig:qualivision_arch}
-\end{figure}
+
 
 \subsection{Dataset and Preprocessing}
 
@@ -111,12 +106,7 @@ The project utilized Transfer Learning with the \textbf{EfficientNetV2B0} archit
 
 The model training pipeline was developed using TensorFlow and \cite{keras} Keras. Training parameters were carefully tuned, including Batch Size, Epochs, Learning Rate, Adam Optimizer, and Binary Crossentropy Loss Function. Advanced techniques such as Early Stopping and Learning Rate Schedulers were employed to optimize convergence during validation.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{images/performance_chart.png}
-\caption{Model Training Performance}
-\label{fig:training_curves}
-\end{figure}
+
 
 \subsection{Model Evaluation and Explainable AI (Grad-CAM)}
 
