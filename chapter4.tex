@@ -87,8 +87,6 @@ The specific objectives of QualiVision AI included:
 The complete system workflow is designed for efficiency and traceability:
 Image Acquisition $\rightarrow$ Image Preprocessing $\rightarrow$ Deep Learning Model $\rightarrow$ Prediction.
 
-
-
 \subsection{Dataset and Preprocessing}
 
 Dataset collection involved sourcing high-quality images from public datasets such as Kaggle. The images were meticulously organized into `Fresh Tomatoes` and `Rotten Tomatoes` categories. Extensive cleaning was performed to remove duplicates and irrelevant images, ensuring dataset balancing across the training, validation, and testing splits. The project reinforced that dataset quality directly dictates model accuracy.
@@ -108,28 +106,17 @@ The project utilized Transfer Learning with the \textbf{EfficientNetV2B0} archit
 
 The model training pipeline was developed using TensorFlow and \cite{keras} Keras. Training parameters were carefully tuned, including Batch Size, Epochs, Learning Rate, Adam Optimizer, and Binary Crossentropy Loss Function. Advanced techniques such as Early Stopping and Learning Rate Schedulers were employed to optimize convergence during validation.
 
-
-
 \subsection{Model Evaluation and Explainable AI (Grad-CAM)}
 
 The model was rigorously evaluated using standard metrics, including Accuracy, Precision, Recall, and F1 Score. The Confusion Matrix and Classification Report provided granular insights into false positives and false negatives, while the ROC Curve illustrated the model's discriminative ability based on prediction confidence.
 
 To ensure trust in the automated system, Explainable AI was integrated. Gradient-weighted Class Activation Mapping (\textbf{Grad-CAM}) was implemented to visualize the specific regions of the image that strongly influenced the model's prediction. This is critical in industrial AI, as operators must understand \textit{why} a product was rejected.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{images/04-inspection.png}
-\caption{Grad-CAM Visualization on Defective Produce}
-\label{fig:gradcam}
-\end{figure}
-
 \subsection{Backend Development and Database}
 
 The backend architecture was developed using the \cite{flask} Flask framework, organized using Blueprints for modularity. REST APIs were developed to handle core services, including Prediction, Dashboard, History, and Report APIs.
 
 SQLite was integrated to ensure persistent storage of inspection records. The database logs the Prediction, Timestamp, Confidence Score, Image Path, and Status of every inspected item.
-
-
 
 \subsection{Frontend Dashboard}
 
@@ -145,25 +132,120 @@ Modules included in the dashboard:
     \item \textbf{Model Management \& Knowledge Center:} For administrative control and system documentation.
 \end{itemize}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{images/02-dashboard.png}
-\caption{QualiVision AI - Executive Dashboard}
-\label{fig:dashboard}
-\end{figure}
+\subsection{Implementation Details}
+
+The AI-Based Live Tomato Freshness Detection System was developed using a combination of Python-based technologies to automate the freshness inspection of tomatoes. The implementation consists of image preprocessing, AI-based prediction, dashboard visualization, alert generation, and inspection history management.
+
+\textbf{Step 1: Dataset Preparation}
+
+A custom dataset containing images of fresh and rotten tomatoes was collected under different lighting conditions, backgrounds, and viewing angles from public sources like Kaggle. The dataset was divided into training, validation, and testing sets to develop a reliable prediction model.
+
+\textit{Technology Used: Python, OpenCV, Pillow (PIL), NumPy}
+
+\vspace{0.3cm}
+
+\textbf{Step 2: Image Preprocessing}
+
+Before training and prediction, the input images were preprocessed to ensure a consistent format. The images were prepared using OpenCV, resized to a fixed dimension using the Pillow library, and converted into numerical arrays using NumPy. This preprocessing helps provide uniform input to the AI model.
+
+\textit{Technology Used: OpenCV, Pillow (PIL), NumPy}
+
+\vspace{0.3cm}
+
+\textbf{Step 3: Model Training}
+
+The prepared dataset was used to train an AI model capable of identifying the visual differences between fresh and rotten tomatoes. After training, the model was verified using test images before being integrated into the application. Explainable AI (Grad-CAM) was also implemented to highlight important image regions.
+
+\textit{Technology Used: TensorFlow, Keras}
+
+\vspace{0.3cm}
+
+\textbf{Step 4: Backend Implementation}
+
+Python was used to develop the application logic using the Flask framework. During execution, the application automatically processes the system input and passes it to the trained AI model. Based on the prediction, the application classifies the object as Fresh, Rotten, or Unknown Object.
+
+\textit{Technology Used: Python, Flask, TensorFlow}
+
+\vspace{0.3cm}
+
+\textbf{Step 5: Dashboard Development}
+
+An interactive dashboard was developed using HTML5, CSS3, Tailwind CSS, JavaScript, and Chart.js to display the prediction results. After every prediction, the dashboard automatically updates by showing the classification result, confidence score, inspection details, and production statistics.
+
+\textit{Technology Used: HTML5, Tailwind CSS, JavaScript, Chart.js}
+
+\vspace{0.3cm}
+
+\textbf{Step 6: Rotten Alert Notification}
+
+When the application detects a rotten tomato, it automatically triggers an alert sound and displays the corresponding warning on the dashboard. This feature provides immediate notification to the user.
+
+\textit{Technology Used: pyttsx3, Flask-SocketIO}
+
+\vspace{0.3cm}
+
+\textbf{Step 7: Inspection History}
+
+Every prediction made by the application is automatically stored in the Inspection History database using SQLite. The stored information includes the inspection ID, timestamp, prediction result, confidence score, and inspection time. This allows users to review previous inspection results whenever required.
+
+\textit{Technology Used: Python, SQLite}
+
+\vspace{0.3cm}
+
+\textbf{Step 8: Final Output}
+
+The application presents the prediction result on the dashboard in one of the following categories:
+\begin{itemize}[leftmargin=1.5cm]
+    \item ACCEPTED -- FRESH for fresh tomatoes.
+    \item REJECTED -- ROTTEN for rotten tomatoes.
+    \item UNKNOWN OBJECT if the detected object is not recognized as a tomato.
+\end{itemize}
+
+The dashboard also displays the confidence score, inspection details, and automatically updates the Inspection History. If a rotten tomato is detected, the system additionally triggers the alert sound.
+
+\vspace{0.3cm}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{images/03-live-monitoring.png}
-\caption{QualiVision AI - Live Monitoring}
-\label{fig:live_monitoring}
+\includegraphics[width=0.45\textwidth]{images/pipeline.png}
+\caption{CNN Architecture Pipeline}
+\label{fig:pipeline}
 \end{figure}
 
 \subsection{Testing and Results}
 
-The system underwent exhaustive testing using fresh tomatoes, rotten tomatoes, unknown objects, and poor-quality images. The confidence threshold logic was validated to ensure that uncertain predictions were routed for manual review. Performance testing confirmed fast inference times and stable database operations.
+The developed application was tested using multiple scenarios including Image Upload, Webcam Inspection, Unknown Object Detection, and Dashboard Updates. Functional testing confirmed that all modules worked correctly and stable database operations were maintained.
 
-The results demonstrated successful, real-time classification with high accuracy. The project proved that fast inference combined with an intuitive industrial dashboard provides substantial automation benefits.
+\textbf{Explainable AI (Grad-CAM):} The system successfully highlights the specific regions of the tomato that strongly influenced the neural network's prediction. This transparency allows operators to understand exactly why a product was flagged as defective.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{images/04-inspection.png}
+\caption{Grad-CAM Visualization on Defective Produce}
+\label{fig:gradcam}
+\end{figure}
+
+\textbf{Dashboard Monitoring:} The Executive Dashboard successfully visualizes the live status of the production line. It dynamically plots analytics, production statistics, and logs the real-time prediction pipeline, ensuring automated monitoring without manual intervention.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{images/02-dashboard.png}
+\caption{QualiVision AI - Executive Dashboard}
+\label{fig:dashboard}
+\end{figure}
+
+\textbf{Fresh/Rotten Detection \& Live Monitoring:} The system accurately detected fresh and rotten tomatoes, instantly updating the live monitoring feed. It successfully triggers the alert and logs the confidence percentage into the database, proving highly reliable for automated inspection.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{images/03-live-monitoring.png}
+\caption{QualiVision AI - Live Monitoring}
+\label{fig:live_monitoring}
+\end{figure}
+
+The AI model was also tested using completely unseen tomato images collected from external sources to verify its generalization capability. Performance testing confirmed fast inference times, proving that fast inference combined with an intuitive industrial dashboard provides substantial automation benefits.
+
+
 
 \subsection{Future Scope and Conclusion}
 
